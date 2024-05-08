@@ -1102,7 +1102,7 @@ class hyperdb extends wpdb {
 	/**
 	 * Generic function to determine if a database supports a particular feature
 	 * The additional argument allows the caller to check a specific database.
-  	 *
+	 *
 	 * @param string $db_cap the feature
 	 * @param false|string|resource $dbh_or_table the databaese (the current database, the database housing the specified table, or the database of the mysql resource)
 	 * @return bool
