@@ -997,7 +997,7 @@ class hyperdb extends wpdb {
 			}
 		}
 
-		if ( $this->last_error === '' ) {
+		if ( '' === $this->last_error ) {
 			$this->last_error = $this->ex_mysql_error( $this->dbh );
 		}
 
