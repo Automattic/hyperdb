@@ -1447,7 +1447,13 @@ class hyperdb extends wpdb {
 		if ( ! $this->use_mysqli ) {
 			return mysql_query( $query, $dbh );
 		}
-
+		$driver = new mysqli_driver();
+		$this->suppress_errors();
+		if ($this->suppress_errors) {
+			$driver->report_mode = MYSQLI_REPORT_OFF;
+		} else {
+			$driver->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
+		}
 		return mysqli_query( $dbh, $query );
 	}
 
