@@ -1,12 +1,12 @@
 <?php
 
 /*
-Plugin Name: HyperDB
-Plugin URI: https://wordpress.org/plugins/hyperdb/
+Plugin Name: LudacrisDB
+Plugin URI: https://github.com/justinmaurerdotdev/HyperDB
 Description: An advanced database class that supports replication, failover, load balancing, and partitioning.
-Author: Automattic
+Author: Automattic, Justin Maurer
 License: GPLv2 or later
-Version: 1.9
+Version: 1.10
 */
 
 // phpcs:disable Squiz.PHP.CommentedOutCode.Found
