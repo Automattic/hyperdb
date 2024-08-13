@@ -1,12 +1,12 @@
 <?php
 
 /*
-Plugin Name: HyperDB
-Plugin URI: https://wordpress.org/plugins/hyperdb/
+Plugin Name: LudacrisDB
+Plugin URI: https://github.com/justinmaurerdotdev/HyperDB
 Description: An advanced database class that supports replication, failover, load balancing, and partitioning.
-Author: Automattic
+Author: Automattic, Justin Maurer
 License: GPLv2 or later
-Version: 1.9
+Version: 1.10
 */
 
 // phpcs:disable Squiz.PHP.CommentedOutCode.Found
@@ -341,7 +341,10 @@ class hyperdb extends wpdb {
 	public function is_write_query( $q ) {
 		// Quick and dirty: only SELECT statements are considered read-only.
 		$q = ltrim( $q, "\r\n\t (" );
-		return ! preg_match( '/^(?:SELECT|SHOW|DESCRIBE|DESC|EXPLAIN)\s/i', $q );
+		return (
+			! preg_match( '/^(?:SELECT|SHOW|DESCRIBE|DESC|EXPLAIN)\s/i', $q )
+			|| preg_match( '/(\sFOR UPDATE)/i', $q )
+		);
 	}
 
 	/**
@@ -1444,7 +1447,12 @@ class hyperdb extends wpdb {
 		if ( ! $this->use_mysqli ) {
 			return mysql_query( $query, $dbh );
 		}
-
+		$driver = new mysqli_driver();
+		if ($this->suppress_errors) {
+			$driver->report_mode = MYSQLI_REPORT_OFF;
+		} else {
+			$driver->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
+		}
 		return mysqli_query( $dbh, $query );
 	}
 
