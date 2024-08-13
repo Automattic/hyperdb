@@ -960,7 +960,7 @@ class hyperdb extends wpdb {
 				$this->ex_mysql_query( $statement_before_query, $this->dbh );
 			}
 
-			$this->result = $this->ex_mysql_query( $query, $this->dbh );
+			$this->result     = $this->ex_mysql_query( $query, $this->dbh );
 			$this->last_error = $this->ex_mysql_error( $this->dbh );
 
 			if ( $statement_after_query ) {
