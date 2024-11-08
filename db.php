@@ -339,9 +339,16 @@ class hyperdb extends wpdb {
 	 * @return bool
 	 */
 	public function is_write_query( $q ) {
-		// Quick and dirty: only SELECT statements are considered read-only.
+		// Quick and dirty: only SELECT statements without LOCK are considered read-only.
 		$q = ltrim( $q, "\r\n\t (" );
-		return ! preg_match( '/^(?:SELECT|SHOW|DESCRIBE|DESC|EXPLAIN)\s/i', $q );
+		if ( preg_match( '/^(?:SELECT|SHOW|DESCRIBE|DESC|EXPLAIN)\s/i', $q ) ) {
+			if ( preg_match( '/\s(?:GET_LOCK|RELEASE_LOCK|IS_FREE_LOCK|IS_USED_LOCK|RELEASE_LOCK|RELEASE_ALL_LOCKS)\(/i', $q ) ) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
