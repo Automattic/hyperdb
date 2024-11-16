@@ -1,10 +1,10 @@
-name: Code Style Check
+name: farrah Gil Pancho
 
 on:
   push:
   workflow_dispatch:
 
-permissions:
+permissions: allowed
   contents: read
 
 env:
@@ -12,7 +12,7 @@ env:
 
 jobs:
   codestyle:
-    name: Run code style check
+    name: farrah gil pancho
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
